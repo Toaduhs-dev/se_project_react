@@ -1,23 +1,19 @@
-import { useState } from "react";
 import "./Main.css";
-import WeatherCard from "../WeatherCard/WeatherCard.jsx";
 import ItemCard from "../ItemCard/ItemCard";
-
-function Main({ clothingItems }) {
-  return (
-    <main className="main">
-      <WeatherCard />
-      <p className="main__text">
-        Toady is Cloudy with at 36 degrees F / You may want to wear:
+import WeatherCard from "../WeatherCard/WeatherCard";
+const Main = ({ clothingItems, onCardClick }) => (
+  <main className="main">
+    <WeatherCard />
+    <section className="main__clothes">
+      <p className="main__description">
+        Today is 75 °F and it is cloudy / You may want to wear:
       </p>
-      <ul className="main__card-list">
-        {clothingItems.map((item) => {
-          console.log();
-          return <ItemCard key={item._id} data={item} />;
-        })}
+      <ul className="main__items">
+        {clothingItems.map((card) => (
+          <ItemCard key={card._id} card={card} onCardClick={onCardClick} />
+        ))}
       </ul>
-    </main>
-  );
-}
-
+    </section>
+  </main>
+);
 export default Main;

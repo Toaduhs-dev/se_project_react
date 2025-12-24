@@ -1,13 +1,23 @@
-import { useState } from "react";
 import "./ItemCard.css";
-
-function ItemCard({ data }) {
+const ItemCard = ({ card, onCardClick }) => {
+  const handleClick = () => {
+    onCardClick(card);
+  };
+  // The ItemCard component renders an image and title of a clothing item.
+  console.log(card);
   return (
     <li className="card">
-      <h2 className="card__title">{data.name}</h2>
-      <img src={data.link} alt={data.name} className="card__image" />
+      <img
+        src={card.link}
+        alt={card.name}
+        onClick={handleClick}
+        className="card__image"
+      />
+      <div className="card__title-and-like">
+        <p className="card__title">{card.name}</p>
+        <button type="button" className="card__like-button" />
+      </div>
     </li>
   );
-}
-
+};
 export default ItemCard;

@@ -3,7 +3,7 @@ import logo from "../../assets/HeaderItems/Logo.png";
 import avatar from "../../assets/HeaderItems/avatarheader.svg";
 import "./Header.css";
 
-function Header() {
+function Header({ handelOpenAddGarmentModal }) {
   const now = new Date();
   const dateStr = now.toLocaleDateString("default", {
     month: "long",
@@ -16,9 +16,14 @@ function Header() {
         <time className="header__datetime" dateTime="{now}">
           {dateStr}
         </time>
-        , New York
+        , Seattle
       </p>
-      <button className="header__add-clothes-btn">+ Add Clothes</button>
+      <button
+        onClick={handelOpenAddGarmentModal}
+        className="header__add-clothes-btn"
+      >
+        + Add Clothes
+      </button>
       <p className="header__username">Daneil K.</p>
       <img src={avatar} alt="Terrence Tegenge" className="header__avatar" />
     </header>
