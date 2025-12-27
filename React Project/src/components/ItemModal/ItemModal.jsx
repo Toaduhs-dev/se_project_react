@@ -10,7 +10,10 @@ const ItemModal = ({ card, onClose, activeModal }) => (
         type="button"
         className="modal__close modal__close_content_image"
         onClick={onClose}
-      />
+      >
+        {" "}
+        X{" "}
+      </button>
       <img
         alt={card.name || ""}
         src={card.link || ""}

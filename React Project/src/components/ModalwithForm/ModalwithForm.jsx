@@ -11,7 +11,10 @@ const ModalWithForm = ({
     className={`modal modal_type_${name} ${isOpen ? "modal_is-opened" : ""}`}
   >
     <div className="modal__content">
-      <button type="button" className="modal__close" onClick={onClose} />
+      <button type="button" className="modal__close" onClick={onClose}>
+        {" "}
+        X{" "}
+      </button>
       <h3 className="modal__title">{title}</h3>
       <form className="modal__form" name={name}>
         {children}
