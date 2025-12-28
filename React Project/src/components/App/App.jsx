@@ -16,6 +16,7 @@ const App = () => {
     setSelectedCard(card);
     setActiveModal("preview");
   };
+  console.log(defaultClothingItems);
   const closeAllModals = () => {
     setActiveModal("");
   };
@@ -43,12 +44,7 @@ const App = () => {
   return (
     <div className="page">
       <div className="page__wrapper">
-        <Header
-          handleAddClick={() => {
-            console.log("click");
-            setActiveModal("create");
-          }}
-        />
+        <Header handleAddClick={() => setActiveModal("create")} />
         <Main clothingItems={clothingItems} onCardClick={handleCardClick} />
         <Footer />
       </div>

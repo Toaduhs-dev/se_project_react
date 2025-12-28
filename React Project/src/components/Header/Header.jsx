@@ -1,66 +1,33 @@
 import { useState } from "react";
-
+import logo from "../../assets/HeaderItems/Logo.png";
+import avatar from "../../assets/HeaderItems/avatarheader.svg";
 import "./Header.css";
 
-import logoPath from "../../assets/HeaderItems/Logo.png";
-import avatarDefault from "../../assets/HeaderItems/avatarheader.svg";
-
-const Header = ({ handleAddClick }) => {
-  const [isMobileMenuOpened, setIsMobileMenuOpened] = useState(false);
-  const currentDate = new Date().toLocaleString("default", {
+function Header({ handelOpenAddGarmentModal }) {
+  const now = new Date();
+  const dateStr = now.toLocaleDateString("default", {
     month: "long",
     day: "numeric",
   });
-  const username = "Daniel King";
-  const avatar = "";
-
-  const handleMobileMenuClick = () => {
-    setIsMobileMenuOpened(!isMobileMenuOpened);
-  };
-
   return (
     <header className="header">
-      <div className="header__container">
-        <img src={logoPath} alt="WTWR logo" className="header__logo" />
-        <p className="header__date">{currentDate}, My City</p>
-      </div>
-      <div
-        className={`header__nav ${
-          isMobileMenuOpened ? "header__nav_opened" : ""
-        }`}
+      <img src={logo} alt="WTWR Logo" className="header__logo" />
+      <p className="header__place">
+        <time className="header__datetime" dateTime="{now}">
+          {dateStr}
+        </time>
+        , Seattle
+      </p>
+      <button
+        onClick={handelOpenAddGarmentModal}
+        className="header__add-clothes-btn"
       >
-        <button onClick={handleAddClick} className="header__add-button">
-          + Add clothes
-        </button>
-        <div className="header__profile">
-          <div className="header__user-name">{username}</div>
-          {avatar ? (
-            <img
-              className="header__avatar"
-              src={avatar || avatarDefault}
-              alt="user avatar"
-            />
-          ) : (
-            <span className="header__avatar header__avatar_none">
-              {username?.toUpperCase().charAt(0) || ""}
-            </span>
-          )}
-        </div>
-        {isMobileMenuOpened && (
-          <button
-            className="header__mobile-close"
-            onClick={handleMobileMenuClick}
-          />
-        )}
-      </div>
-      {!isMobileMenuOpened && (
-        <button
-          className="header__mobile-menu"
-          onClick={handleMobileMenuClick}
-        />
-      )}
+        + Add Clothes
+      </button>
+      <p className="header__username">Daneil K.</p>
+      <img src={avatar} alt="Terrence Tegenge" className="header__avatar" />
     </header>
   );
-};
+}
 
 export default Header;
