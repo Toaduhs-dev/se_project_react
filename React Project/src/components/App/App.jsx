@@ -8,7 +8,6 @@ import ModalwithForm from "../ModalwithForm/ModalwithForm";
 import { defaultClothingItems } from "../../../utils/ClothingItems.js";
 
 const App = () => {
-  // The initial state of state variables contains the correct data type.
   const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
@@ -21,13 +20,10 @@ const App = () => {
     setActiveModal("");
   };
 
-  // The escape listener implementation is optional
   useEffect(() => {
-    // If no active modal, don't use the listener
     if (!activeModal) return;
 
     const handleEscClose = (e) => {
-      // Define function inside useEffect to keep the reference on rerender
       if (e.key === "Escape") {
         closeAllModals();
       }
@@ -36,18 +32,14 @@ const App = () => {
     document.addEventListener("keydown", handleEscClose);
 
     return () => {
-      // Cleanup by removing listener
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]);
-  // The escape listener implementation is optional
 
-  // The App component saves default clothing items in the state.
   useEffect(() => {
     setClothingItems(defaultClothingItems);
   }, []);
 
-  // The App component includes Header, Main, Footer, ModalWithForm, and ItemModal components.
   return (
     <div className="page">
       <div className="page__wrapper">
