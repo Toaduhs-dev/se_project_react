@@ -3,7 +3,7 @@ const ItemCard = ({ card, onCardClick }) => {
   const handleClick = () => {
     onCardClick(card);
   };
-  // The ItemCard component renders an image and title of a clothing item.
+
   return (
     <li className="card">
       <img

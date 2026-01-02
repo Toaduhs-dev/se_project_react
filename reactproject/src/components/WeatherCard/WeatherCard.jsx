@@ -9,10 +9,8 @@ import {
 const WeatherCard = ({ weatherData }) => {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
-  // Destructure safely
   const { temperature, day = true, condition = "clear" } = weatherData || {};
 
-  // Extract the correct temperature value based on current unit (F or C)
   const tempValue =
     temperature &&
     typeof temperature === "object" &&
@@ -20,7 +18,6 @@ const WeatherCard = ({ weatherData }) => {
       ? temperature[currentTemperatureUnit]
       : 0;
 
-  // Find matching weather background image
   const weatherOption = weatherOptions.find((option) => {
     return (
       option.day === day &&
@@ -28,14 +25,13 @@ const WeatherCard = ({ weatherData }) => {
     );
   });
 
-  // Fallback to default day/night image
   const fallbackOption = defaultWeatherOptions[day ? "day" : "night"];
   const weatherOptionUrl = weatherOption?.url || fallbackOption.url;
 
   return (
     <section className="weather-card">
       <div className="weather-card__info">
-        {tempValue}°{currentTemperatureUnit}
+        {weatherData.temperature}°{currentTemperatureUnit}
       </div>
       <img
         src={weatherOptionUrl}

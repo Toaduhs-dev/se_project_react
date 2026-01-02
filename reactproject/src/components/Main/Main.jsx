@@ -21,8 +21,8 @@ const Main = ({ weatherData, cards, onCardClick }) => {
 
       <section className="main__clothes">
         <p className="main__description">
-          Today is {currentTemp}°{currentTemperatureUnit} / You might want to
-          wear:
+          Today is {weatherData.temperature}°{currentTemperatureUnit} / You
+          might want to wear:
         </p>
 
         <ul className="main__items">

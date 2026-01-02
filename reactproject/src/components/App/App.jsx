@@ -18,10 +18,9 @@ import {
 } from "../utils/weatherApi";
 
 const App = () => {
-  // The initial state of state variables contains the correct data type.
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [weatherData, setWeatherData] = useState({
-    temperature: { F: 999, C: 999 },
+    temperature: 999,
     day: true,
     condition: "",
   });
@@ -44,7 +43,6 @@ const App = () => {
       : setCurrentTemperatureUnit("F");
   };
 
-  // The App component makes an API request for the weather data (only once — on mounting).
   useEffect(() => {
     if (!location.latitude || !location.longitude) return;
 
@@ -52,7 +50,7 @@ const App = () => {
       getForecastWeather(location, apiKey)
         .then((data) => {
           const filteredData = filterDataFromWeatherAPI(data);
-          console.log("Fetched weather data:", filteredData); // Temporary – check console!
+          console.log("Fetched weather data:", filteredData);
           setWeatherData(filteredData);
         })
         .catch((err) => {
@@ -60,20 +58,16 @@ const App = () => {
         });
     };
 
-    fetchWeather(); // Initial fetch
+    fetchWeather();
 
-    const intervalId = setInterval(fetchWeather, 600000); // Every 10 minutes
+    const intervalId = setInterval(fetchWeather, 600000);
+    return () => clearInterval(intervalId);
+  }, [location, apiKey]);
 
-    return () => clearInterval(intervalId); // Cleanup on unmount
-  }, [location, apiKey]); // Re-run if location changes
-
-  // The escape listener implementation is optional
   useEffect(() => {
-    // If no active modal, don't use the listener
     if (!activeModal) return;
 
     const handleEscClose = (e) => {
-      // Define function inside useEffect to keep the reference on rerender
       if (e.key === "Escape") {
         closeAllModals();
       }
@@ -82,18 +76,14 @@ const App = () => {
     document.addEventListener("keydown", handleEscClose);
 
     return () => {
-      // Cleanup by removing listener
       document.removeEventListener("keydown", handleEscClose);
     };
   }, [activeModal]);
-  // The escape listener implementation is optional
 
-  // The App component saves default clothing items in the state.
   useEffect(() => {
     setClothingItems(defaultClothingItems);
   }, []);
 
-  // The App component includes Header, Main, Footer, ModalWithForm, and ItemModal components.
   return (
     <div className="page">
       <CurrentTemperatureUnitContext.Provider
