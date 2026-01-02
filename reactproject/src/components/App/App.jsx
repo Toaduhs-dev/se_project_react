@@ -46,14 +46,26 @@ const App = () => {
 
   // The App component makes an API request for the weather data (only once — on mounting).
   useEffect(() => {
-    if (location.latitude && location.longitude) {
+    if (!location.latitude || !location.longitude) return;
+
+    const fetchWeather = () => {
       getForecastWeather(location, apiKey)
         .then((data) => {
-          setWeatherData(filterDataFromWeatherAPI(data));
+          const filteredData = filterDataFromWeatherAPI(data);
+          console.log("Fetched weather data:", filteredData); // Temporary – check console!
+          setWeatherData(filteredData);
         })
-        .catch(console.error);
-    }
-  }, []);
+        .catch((err) => {
+          console.error("Weather fetch error:", err);
+        });
+    };
+
+    fetchWeather(); // Initial fetch
+
+    const intervalId = setInterval(fetchWeather, 600000); // Every 10 minutes
+
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, [location, apiKey]); // Re-run if location changes
 
   // The escape listener implementation is optional
   useEffect(() => {
